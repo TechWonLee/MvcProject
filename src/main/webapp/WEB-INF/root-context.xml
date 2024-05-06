@@ -15,12 +15,12 @@ http://mybatis.org/schema/mybatis-spring-2.0.xsd">
     <!--classpath:에 나의 db정보를 입력해놓는다. 그럼 이로코롬 가져올 수 있음. 그냥 생성안하고 바로 입력해도 됨.
     -->
 
-   <!--<context:property-placeholder location="classpath:application.properties"/>-->
+    <context:property-placeholder location="classpath:application.properties" />
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/woncoding?useUnicode=true&amp;characterEncoding=utf8" />
-        <property name="username" value="root" />
-        <property name="password" value="dldnjs1!" />
+        <property name="driverClassName" value="${spring.datasource.driverClass}" />
+        <property name="url" value="${spring.datasource.url}" />
+        <property name="username" value="${spring.datasource.username}" />
+        <property name="password" value="${spring.datasource.password}" />
 
     </bean>
 

@@ -17,7 +17,7 @@
 </select>-->
     <!-- resultType을 form객체로 그대로 가져 오려면 vo의 필드값과 컬럼을 동일하게 맞춰야함.  -->
   <select id="loginCheck" parameterType="com.wonlee.spring.form.LoginForm" resultType="com.wonlee.spring.form.LoginForm">
-    select * from userinfo where userid = #{userid} and passwd = #{passwd};
+    select * from userinfo where userid = #{userid} and password = #{password};
     </select>
 
     <select id="getuserList" resultType="com.wonlee.spring.User.UserInfo">

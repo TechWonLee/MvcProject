@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class LoginForm {
+	public String userid;
+    public String password;
 
 
     public String getUserid() {
@@ -14,17 +16,19 @@ public class LoginForm {
         this.userid = userid;
     }
 
-    public String getPasswd() {
-        return passwd;
-    }
+    public String getPassword() {
+		return password;
+	}
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String userid;
-    public String passwd;
+	
 
+   
+
+    
 
 
 

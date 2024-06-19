@@ -44,11 +44,11 @@ public class Woncontroller {
         session.getId();
         // servlet 으로 파라미터 받기
         String id = request.getParameter("userid");
-        String pw = request.getParameter("passwd");
+        String pw = request.getParameter("password");
 
         //<form:form> 으로 파라미터 받기
         form.setUserid(id);
-        form.setPasswd(pw);
+        form.setPassword(pw);
         //없어도 되는 코드임 login 상세보기 추가
         /*model.addAttribute("loginch",islogin);
         model.addAttribute("form",form);*/

@@ -36,28 +36,27 @@ public class Woncontroller {
         public ModelAndView loginCheck(HttpServletRequest request, @ModelAttribute("loginForm") LoginForm form, Model model) throws Exception {
         boolean islogin = true;
         ModelAndView mav = new ModelAndView();
-
-
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(1800);
 
-        session.getId();
+        //session.getId();
         // servlet 으로 파라미터 받기
-        String id = request.getParameter("userid");
-        String pw = request.getParameter("password");
+        //String id = request.getParameter("userid");
+        //String pw = request.getParameter("password");
 
         //<form:form> 으로 파라미터 받기
-        form.setUserid(id);
-        form.setPassword(pw);
+        String id = form.getUserid();
+        //form.setPassword(pw);
         //없어도 되는 코드임 login 상세보기 추가
         /*model.addAttribute("loginch",islogin);
         model.addAttribute("form",form);*/
-        session.setAttribute("id",id);
-
+    
         LoginForm loginch = userService.loginCheck(form);
+        
         if(loginch == null || loginch.getUserid() == null) {
             islogin = false;
-            model.addAttribute("loginch",islogin);
+            session.invalidate();
+            model.addAttribute("islogin",islogin);
             mav.setViewName("login");
             return mav;
         }

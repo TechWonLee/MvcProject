@@ -26,10 +26,11 @@ private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
         LoginForm checkform = new LoginForm();
         checkform = userMapper.loginCheck(form);
        return checkform;
+       
         } catch (Exception e) {
             log.error("Error 발생 {}" ,e);
             e.printStackTrace();
-            //그냥 null을 return하는게 효율적임
+            //null을 return하여 로그인을 막음
             LoginForm checkform = null;
             return checkform;
         }

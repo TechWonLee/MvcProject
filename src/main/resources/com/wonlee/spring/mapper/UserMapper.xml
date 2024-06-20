@@ -3,10 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
-
-
 <mapper namespace="com.wonlee.spring.mapper.UserMapper">
   <!--  <resultMap id="loginFormResultMap" type="com.wonlee.spring.form.LoginForm">
         <result column="userid" property="id"/>
@@ -17,15 +13,15 @@
 </select>-->
     <!-- resultType을 form객체로 그대로 가져 오려면 vo의 필드값과 컬럼을 동일하게 맞춰야함.  -->
   <select id="loginCheck" parameterType="com.wonlee.spring.form.LoginForm" resultType="com.wonlee.spring.form.LoginForm">
-    select * from userinfo where userid = #{userid} and password = #{password};
+    select userid from userinfo where userid = #{userid} and password = #{password};
     </select>
 
     <select id="getuserList" resultType="com.wonlee.spring.User.UserInfo">
-        select userid,passwd from userinfo;
+        select userid from userinfo;
     </select>
 
     <select id="getuserinfo" parameterType="com.wonlee.spring.User.UserInfo" resultType="com.wonlee.spring.User.UserInfo">
-        select * from userinfo where userid = #{id};
+        select * from userinfo where userid = #{userid};
     </select>
 
 

@@ -7,11 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원 아이디 목록</title>
+    <title>유저 아이디 목록</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
-<h1>회원 아이디 목록</h1>
+<h1>유저 아이디 목록</h1>
 <ul>
     <c:forEach var="userlist" items="${userList}">
         <li><a href="/view/${userlist.userid}">${userlist.userid}</a></li>

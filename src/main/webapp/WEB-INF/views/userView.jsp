@@ -6,18 +6,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원 정보</title>
+    <title>유저 정보</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
-<h1>회원 정보</h1>
+<h1>유저 정보</h1>
 <div class="container">
     <div class="user-info">
         <div>
             <label>아이디:</label> ${userInfo.userid}
         </div>
         <div>
-            <label>비밀번호:</label> ${userInfo.passwd}
+            <label>비밀번호:</label> ${userInfo.password}
         </div>
         <div>
             <label>이름:</label> ${userInfo.name}

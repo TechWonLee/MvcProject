@@ -1,11 +1,10 @@
 package com.wonlee.spring.User;
 
-import lombok.Data;
 
-@Data
 public class UserInfo {
+	//로그인 form 객체와는 엄연히 다른 역할이라 분리함.
     public String userid;
-    public String passwd;
+    public String password;
     public String name;
     public String email;
 
@@ -28,12 +27,12 @@ public class UserInfo {
         this.userid = userid;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -51,14 +50,6 @@ public class UserInfo {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
-
-
-
-
-
 
 
 

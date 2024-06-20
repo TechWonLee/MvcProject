@@ -16,11 +16,13 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService  {
+	
 private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     private UserMapper userMapper;
 
-    @Override
+    
     public LoginForm loginCheck(LoginForm form)   {
         try{
         LoginForm checkform = new LoginForm();
@@ -28,7 +30,7 @@ private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
        return checkform;
        
         } catch (Exception e) {
-            log.error("Error 발생 {}" ,e);
+            log.error("loginCheck Error {}" ,e);
             e.printStackTrace();
             //null을 return하여 로그인을 막음
             LoginForm checkform = null;
@@ -36,20 +38,21 @@ private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
         }
     }
 
-    @Override
+ 
     public List<UserList> getUserList() {
         try {
             List<UserList> userList;
             userList = userMapper.getuserList();
             return userList;
         }catch (Exception e) {
-            log.error("Error 발생 {}" ,e);
+            log.error("getUserList Error {}" ,e);
             e.printStackTrace();
             List<UserList> userList = null;
             return userList;
 
         }
     }
+  
     public UserInfo getuserinfo(String id) {
         try {
             UserInfo userinfo;
@@ -57,7 +60,7 @@ private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
             return userinfo;
 
         } catch (Exception e) {
-            log.error("Error 발생 {}", e);
+            log.error(" getuserinfo Error {}", e);
             e.printStackTrace();
             UserInfo userInfo = null;
             return userInfo;

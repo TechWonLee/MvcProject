@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
-import static org.springframework.util.ObjectUtils.isEmpty;
+//import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Controller
 public class Woncontroller {
@@ -45,14 +45,16 @@ public class Woncontroller {
         //String pw = request.getParameter("password");
 
         //<form:form> 으로 파라미터 받기
-        String id = form.getUserid();
+        //String id = form.getUserid();
+        
         //form.setPassword(pw);
         //없어도 되는 코드임 login 상세보기 추가
         /*model.addAttribute("loginch",islogin);
         model.addAttribute("form",form);*/
     
         LoginForm loginch = userService.loginCheck(form);
-        
+      /*loginch이 null이거나, loginch에 userid가 null일경우 islogin을 false로
+        바꾸고 login.jsp를 호출시킴*/
         if(loginch == null || loginch.getUserid() == null) {
             islogin = false;
             session.invalidate();
@@ -60,7 +62,7 @@ public class Woncontroller {
             mav.setViewName("login");
             return mav;
         }
-        model.addAttribute(loginch);
+   
         List<UserList> ulist= userService.getUserList();
         model.addAttribute("userList",ulist);
         mav.setViewName("userList");

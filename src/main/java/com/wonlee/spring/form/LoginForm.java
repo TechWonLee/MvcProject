@@ -1,8 +1,6 @@
 package com.wonlee.spring.form;
 
-import lombok.Data;
 
-@Data
 public class LoginForm {
 	public String userid;
     public String password;

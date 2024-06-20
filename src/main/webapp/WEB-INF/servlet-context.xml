@@ -26,8 +26,6 @@
     </bean>
 
 
-
-
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -57,10 +55,5 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
-
-
-
-
 
 </beans>

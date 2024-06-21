@@ -22,14 +22,15 @@ import java.util.List;
 //import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Controller
-public class Woncontroller {
+@RequestMapping("/login")
+public class LoginController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping("/login.do")
-    public String test() {
-        return "login";
+    public String login() {
+        return "login/login";
     }
 
     @RequestMapping("/login_check.do")
@@ -59,13 +60,13 @@ public class Woncontroller {
             islogin = false;
             session.invalidate();
             model.addAttribute("islogin",islogin);
-            mav.setViewName("login");
+            mav.setViewName("login/login");
             return mav;
         }
    
         List<UserList> ulist= userService.getUserList();
         model.addAttribute("userList",ulist);
-        mav.setViewName("userList");
+        mav.setViewName("login/userList");
 
         return mav ;
     }
@@ -77,8 +78,8 @@ public class Woncontroller {
         String datetime = userinfo.getJoin_date();
         String joindate = datetime.substring(0,16);
         userinfo.setJoin_date(joindate);
-        model.addAttribute("userInfo",userinfo);
-        mav.setViewName("userView");
+        model.addAttribute("userinfo",userinfo);
+        mav.setViewName("login/userView");
         return mav ;
     }
 

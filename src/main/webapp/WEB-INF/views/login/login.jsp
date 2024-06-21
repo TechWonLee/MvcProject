@@ -14,7 +14,7 @@
 <div class="container">
     <h2>로그인</h2>
 <%--    <form action="/login_check.do" method="post">--%>
-        <form:form modelAttribute="loginForm" id="loginForm" name="loginForm" action="/login_check.do" method="post">
+        <form:form modelAttribute="loginForm" id="loginForm" name="loginForm" action="/login/login_check.do" method="post">
         <input type="text" name="userid" placeholder="유저 아이디" required>
         <input type="password" name="password" placeholder="비밀번호" required>
         <input type="submit" value="로그인">

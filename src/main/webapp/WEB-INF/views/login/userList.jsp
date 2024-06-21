@@ -14,7 +14,7 @@
 <h1>유저 아이디 목록</h1>
 <ul>
     <c:forEach var="userlist" items="${userList}">
-        <li><a href="/view/${userlist.userid}">${userlist.userid}</a></li>
+        <li><a href="/login/view/${userlist.userid}">${userlist.userid}</a></li>
     </c:forEach>
 </ul>
 </body>

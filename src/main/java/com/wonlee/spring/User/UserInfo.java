@@ -7,6 +7,7 @@ public class UserInfo {
     public String password;
     public String name;
     public String email;
+    public String join_date;
 
     public String getJoin_date() {
         return join_date;
@@ -15,8 +16,6 @@ public class UserInfo {
     public void setJoin_date(String join_date) {
         this.join_date = join_date;
     }
-
-    public String join_date;
 
 
     public String getUserid() {

@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1>게시판</h1>
-        <a href="${pageContext.request.contextPath}/createPost" class="btn-create">글 작성</a>
+        <a href="/board/boardWriteView.do?userid=${userinfo.userid}" class="btn-create">글 작성</a>
         <div class="table-container">
             <table>
                 <thead>
@@ -24,16 +24,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="post" items="${posts}">
+                    <c:forEach var="boardList" items="${boardList}">
                         <tr>
-                            <td>${post.id}</td>
-                            <td><a href="${pageContext.request.contextPath}/viewPost?id=${post.id}">${post.title}</a></td>
-                            <td>${post.author}</td>
-                            <td>${post.date}</td>
-                            <td>${post.views}</td>
+                            <td>${boardList.seq}</td>
+                            <td><a href="${pageContext.request.contextPath}/viewPost?id=${boardList.userid}">${boardList.title}</a></td>
+                            <td>${boardList.userid}</td>
+                            <td>${boardList.write_date}</td>
+                            <td>${boardList.view_cnt}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/editPost?id=${post.id}" class="btn-edit">수정</a>
-                                <a href="${pageContext.request.contextPath}/deletePost?id=${post.id}" class="btn-delete">삭제</a>
+                                <a href="${pageContext.request.contextPath}/editPost?id=${boardList.userid}" class="btn-edit">수정</a>
+                                <a href="${pageContext.request.contextPath}/deletePost?id=${boardList.userid}" class="btn-delete">삭제</a>
                             </td>
                         </tr>
                     </c:forEach>

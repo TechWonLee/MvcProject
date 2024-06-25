@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1>게시판 글 작성</h1>
-        <form:form modelAttribute="boardForm" id="boardForm" name="boardForm" action="/board/board_write.do" method="post">
+        <form:form modelAttribute="boardForm" id="boardForm" name="boardForm" action="/board/boardWrite.do" method="post">
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" id="title" name="title" required>

@@ -26,13 +26,14 @@ public class BoardController {
 	public String boardList(@RequestParam("userid") String userid, @RequestParam("password") String password,
 			Model model) {
 
-	
 		List<BoardForm> boardform = boardService.boardList();
-		UserInfo  userinfo = userService.getuserinfo(userid);
-		
+		if (boardform == null) {
+			return "error/error";
+		}
+		UserInfo userinfo = userService.getuserinfo(userid);
+
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("boardList", boardform);
-	
 
 		return "board/boardList";
 	}
@@ -47,14 +48,33 @@ public class BoardController {
 		return "board/boardWrite";
 	}
 
-	@RequestMapping("board_write.do")
-	public String boardWrite(@ModelAttribute("boardForm") BoardForm form) {
+	@RequestMapping("boardWrite.do")
+	public String boardWrite(@ModelAttribute("boardForm") BoardForm form, Model model) {
 
 		int isSucess = boardService.boardWrite(form);
-		if(isSucess ==1) {
+		if (isSucess == 1) {
+			List<BoardForm> boardList = boardService.boardList();
+			if (boardList == null) {
+				return "error/error";
+			}
+			UserInfo userinfo = userService.getuserinfo(form.getUserid());
+
+			model.addAttribute("userinfo", userinfo);
+			model.addAttribute("boardList", boardList);
 			return "board/boardList";
 		}
 		return "error/error";
+	}
+
+	@RequestMapping("boardView.do")
+	public String boardView(@RequestParam("seq") String seq, Model model) {
+
+		BoardForm boardform = boardService.boardView(seq);
+		model.addAttribute("board", boardform);
+		if (boardform == null) {
+			return "error/error";
+		}
+		return "board/boardView";
 	}
 
 }

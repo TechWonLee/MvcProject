@@ -13,8 +13,15 @@
 
 	<select id="boardList"
 		resultType="com.wonlee.spring.form.BoardForm">
-		select * from board;
+		select seq, userid , title , content , name, DATE_FORMAT(write_date, '%Y-%m-%d') AS write_date from board order by seq DESC;
 	</select>
+	
+	<select id="boardView"
+		resultType="com.wonlee.spring.form.BoardForm">
+		select * from board where seq = #{seq}
+	</select>
+	
+	
 
 
 </mapper>

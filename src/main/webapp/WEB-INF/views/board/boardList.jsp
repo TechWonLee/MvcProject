@@ -16,23 +16,24 @@
             <table>
                 <thead>
                     <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>조회수</th>
+                        <th style="text-align: center;">번호</th>
+                        <th style="text-align: center;">제목</th>
+                        <th style="text-align: center;">작성자</th>
+                        <th style="text-align: center;">작성일</th>
+                        <th style="text-align: center;">조회수</th>
+                        <th style="text-align: center;">글관리</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="boardList" items="${boardList}">
                         <tr>
-                            <td>${boardList.seq}</td>
-                            <td><a href="${pageContext.request.contextPath}/viewPost?id=${boardList.userid}">${boardList.title}</a></td>
-                            <td>${boardList.userid}</td>
-                            <td>${boardList.write_date}</td>
-                            <td>${boardList.view_cnt}</td>
-                            <td>
-                                <a href="${pageContext.request.contextPath}/editPost?id=${boardList.userid}" class="btn-edit">수정</a>
+                            <td style="text-align: center;">${boardList.seq}</td>
+                            <td style="text-align: center;"><a href="/board/boardView.do?seq=${boardList.seq}">${boardList.title}</a></td>
+                            <td style="text-align: center;">${boardList.userid}</td>
+                            <td style="text-align: center;">${boardList.write_date}</td>
+                            <td style="text-align: center;">${boardList.view_cnt}</td>
+                            <td style="text-align: center;">
+                                <a href="/board/boardView.do?seq=${boardList.seq}" class="btn-edit">수정</a>
                                 <a href="${pageContext.request.contextPath}/deletePost?id=${boardList.userid}" class="btn-delete">삭제</a>
                             </td>
                         </tr>

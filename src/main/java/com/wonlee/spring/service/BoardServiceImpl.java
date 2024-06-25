@@ -35,10 +35,27 @@ public class BoardServiceImpl implements BoardService {
 		return suceess;
 
 	}
-	
+
 	public List<BoardForm> boardList() {
-		return boardMapper.boardList();
+		try {
+			return boardMapper.boardList();
+		} catch (Exception e) {
+			log.error("loginCheck Error {}", e);
+			e.printStackTrace();
+			return null;
+		}
 	}
-	
+
+	public BoardForm boardView(String seq) {
+
+		try {
+			return boardMapper.boardView(seq);
+
+		} catch (Exception e) {
+			log.error("loginCheck Error {}", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

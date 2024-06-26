@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>게시글 상세보기</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board.css">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/board.js"></script>
+   
 </head>
 
 <body>
@@ -19,12 +22,15 @@
             <label for="title">제목</label>
             <p id="title" style="text-align: center;">${board.title}</p>
         </div>
-        <div class="detail-group">
+        <div class="form-group">
             <label for="content">내용</label>
-            <p id="content" style="text-align: center;" >${board.content}</p>
+            <p id="showcontent" style="text-align: center;" >${board.content}</p>
+             <input type="hidden" id="boardContent" value="${board.content}">
+            <div id="content-div">
+            </div>
         </div>
-        <div class="detail-buttons">
-            <a href="${pageContext.request.contextPath}/board/boardEdit.do?boardId=${board.userid}" class="btn-edit">수정</a>
+        <div id="detail-buttons" class="detail-buttons">
+             <button id="editbutton" class="btn-edit">수정</button>
             <a href="javascript:window.history.back();" class="btn-back">뒤로가기</a>
         </div>
     </div>

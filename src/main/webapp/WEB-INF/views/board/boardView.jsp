@@ -16,11 +16,14 @@
         <h1>게시글 상세보기</h1><br>
         <div class="detail-group">
             <label for="author" style="text-align: center;">작성자: ${board.userid} </label>
+            <input type="hidden" id="userid" value="${board.userid}">
+             <input type="hidden" id="seq" value="${board.seq}">
             
         </div>
         <div class="detail-group">
             <label for="title">제목</label>
-            <p id="title" style="text-align: center;">${board.title}</p>
+            <p id="BoardTitle" style="text-align: center;">${board.title}</p>
+             <input type="hidden" id="title" value="${board.title}">
         </div>
         <div class="form-group">
             <label for="content">내용</label>

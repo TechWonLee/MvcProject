@@ -21,7 +21,12 @@
 		select * from board where seq = #{seq}
 	</select>
 	
-	
+	<update id="boardUpdate" parameterType="com.wonlee.spring.form.BoardForm">
+    update board set
+        content = #{content},
+        title = #{title}
+    where userid = #{userid} and seq = #{seq}
+</update>
 
 
 </mapper>

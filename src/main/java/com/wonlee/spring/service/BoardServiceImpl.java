@@ -46,7 +46,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
-	public BoardForm boardView(String seq) {
+	public BoardForm boardView(int seq) {
 
 		try {
 			return boardMapper.boardView(seq);
@@ -57,5 +57,20 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return null;
 	}
+	
+	public int boardUpdate(BoardForm form) {
+		int suceess = 1;
+		try {
+			 boardMapper.boardUpdate(form);
+			 return suceess;
+
+		} catch (Exception e) {
+			log.error("loginCheck Error {}", e);
+			e.printStackTrace();
+			suceess =0;
+			return suceess;
+		}
+	}
+	
 
 }

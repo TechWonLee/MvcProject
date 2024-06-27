@@ -38,7 +38,9 @@ public class LoginController {
         boolean islogin = true;
         ModelAndView mav = new ModelAndView();
         HttpSession session = request.getSession();
+        session.setAttribute("userid",form.getUserid());
         session.setMaxInactiveInterval(1800);
+        
 
         //session.getId();
         // servlet 으로 파라미터 받기

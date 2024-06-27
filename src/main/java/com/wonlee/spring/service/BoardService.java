@@ -10,6 +10,8 @@ public interface BoardService {
 	
 	public List<BoardForm> boardList();
 	
-	public BoardForm boardView(String seq);
+	public BoardForm boardView(int seq);
+	
+	public int boardUpdate(BoardForm form);
 
 }

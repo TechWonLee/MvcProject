@@ -12,6 +12,7 @@ import com.wonlee.spring.form.BoardForm;
 public interface BoardMapper {
 	public int boardWrite(BoardForm form);
 	public List<BoardForm> boardList();
-	public BoardForm boardView(String seq);
+	public BoardForm boardView(int seq);
+	public int boardUpdate(BoardForm form);
 
 }

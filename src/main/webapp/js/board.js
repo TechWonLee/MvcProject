@@ -46,8 +46,9 @@ $(document).ready(function() {
 				}),
 				dataType: "json",
 				success: function(response) {
-				   debugger;
+				
 					if(response.sessionReset === '0') {
+						alert(response.message);
 						return window.location.href = "/login/login.do";
 					}
 					
@@ -58,7 +59,8 @@ $(document).ready(function() {
 				error: function(status, error) {
 					console.log("status : : :"+ status );
 					console.log("error : : :"+ error);
-				        alert(response.message);
+				    alert(response.message);
+					return window.location.href = "/error/error.do";
 				    }
 
 

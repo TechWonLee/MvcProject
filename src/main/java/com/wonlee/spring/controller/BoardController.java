@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.wonlee.spring.User.UserInfo;
 import com.wonlee.spring.form.BoardForm;
 import com.wonlee.spring.service.BoardService;
@@ -28,8 +30,8 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping("/boardList.do")
-	public String boardList(@RequestParam("userid") String userid, @RequestParam("password") String password,
-			Model model, HttpSession session) {
+	public String boardList(@RequestParam(value = "userid", required = false) String userid,
+			@RequestParam(value = "password", required = false) String password, Model model, HttpSession session) {
 
 		String sessionId = (String) session.getAttribute("userid");
 		if (sessionId == null) {
@@ -41,7 +43,7 @@ public class BoardController {
 			return "error/error";
 		}
 		UserInfo userinfo = userService.getuserinfo(userid);
-
+		model.addAttribute("sessionId", sessionId);
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("boardList", boardform);
 
@@ -64,7 +66,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardWrite.do")
-	public String boardWrite(@ModelAttribute("boardForm") BoardForm form, Model model, HttpSession session) {
+	public String boardWrite(@ModelAttribute("boardForm") BoardForm form, Model model, HttpSession session,
+			RedirectAttributes redirectAttributes) {
 
 		String sessionId = (String) session.getAttribute("userid");
 		if (sessionId == null) {
@@ -73,16 +76,12 @@ public class BoardController {
 
 		int isSucess = boardService.boardWrite(form);
 		if (isSucess == 1) {
-			List<BoardForm> boardList = boardService.boardList();
-			if (boardList == null) {
-				return "error/error";
-			}
-			UserInfo userinfo = userService.getuserinfo(form.getUserid());
-			model.addAttribute("userinfo", userinfo);
-			model.addAttribute("boardList", boardList);
-			return "board/boardList";
+		} else {
+			return "error/error";
 		}
-		return "error/error";
+		redirectAttributes.addAttribute("userid", form.getUserid());
+		return "redirect:/board/boardList.do";
+
 	}
 
 	@RequestMapping("boardView.do")
@@ -93,7 +92,7 @@ public class BoardController {
 		}
 
 		BoardForm boardform = boardService.boardView(seq);
-		model.addAttribute("sessionId",sessionId);
+		model.addAttribute("sessionId", sessionId);
 		model.addAttribute("board", boardform);
 		if (boardform == null) {
 			return "error/error";
@@ -126,6 +125,37 @@ public class BoardController {
 			} catch (Exception e) {
 				Log.error("Update Error{}", e);
 				jsonObject.put("message", "게시글 업데이트 중 오류가 발생했습니다.");
+				return jsonObject;
+			}
+		}
+	}
+
+	@ResponseBody
+	@PostMapping("/boardDelete.do")
+	public JSONObject boardDelete(@RequestParam("userid") String userid, @RequestParam("seq") String seq,
+			HttpSession session, Model model) {
+		String sessionId = (String) session.getAttribute("userid");
+
+		JSONObject jsonObject = new JSONObject();
+
+		if (sessionId == null) {
+			session.invalidate();
+			jsonObject.put("sessionReset", "0");
+			jsonObject.put("message", "세션이 종료되었습니다. \n로그인이 필요합니다.");
+
+			return jsonObject;
+		} else if (!sessionId.equals(userid)) {
+			jsonObject.put("message", "작성자가 일치하지 않습니다.");
+			return jsonObject;
+		} else {
+			try {
+				int success = boardService.boardDelete(userid, seq);
+
+				jsonObject.put("message", "게시글이 성공적으로 삭제되었습니다.");
+				return jsonObject;
+			} catch (Exception e) {
+				Log.error("Update Error{}", e);
+				jsonObject.put("message", "게시글 삭제 중 오류가 발생했습니다.");
 				return jsonObject;
 			}
 		}

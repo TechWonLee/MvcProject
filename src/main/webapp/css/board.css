@@ -146,6 +146,19 @@ table tr:hover {
     border-radius: 3px;
 }
 
+.detail-group input[type="text"].hidden-input {
+    display: none;
+}
+
+.detail-group input[type="text"].visible-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff; /* 배경색을 흰색으로 설정 */
+    text-align: center;
+}
+
 .detail-buttons {
     text-align: center;
     margin-top: 20px;

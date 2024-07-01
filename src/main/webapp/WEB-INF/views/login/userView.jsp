@@ -8,8 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유저 정보</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/user.js"></script>
 </head>
 <body>
+<form name="goBoard" action="/board/boardList.do" method="post">
 <h1>유저 정보</h1>
 <div class="container">
     <div class="user-info">
@@ -31,11 +34,12 @@
         </div>
     </div>
     <div class="button-container">
-    <a href="/board/boardList.do?userid=${userinfo.userid}&password=${userinfo.password}" class="btn-board">게시판</a>
+    <a href="#" onclick="javascript:document.goBoard.submit();" class="btn-board">게시판</a>
     
     <a href="javascript:window.history.back();" class="btn-back">뒤로 가기</a>
 </div>
     
 </div>
+</form>
 </body>
 </html>

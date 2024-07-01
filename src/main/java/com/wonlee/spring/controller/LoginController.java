@@ -34,13 +34,13 @@ public class LoginController {
     }
 
     @RequestMapping("/login_check.do")
-        public ModelAndView loginCheck(HttpServletRequest request, @ModelAttribute("loginForm") LoginForm form, Model model) throws Exception {
+        public ModelAndView loginCheck(HttpServletRequest request, @ModelAttribute("loginForm") LoginForm form) throws Exception {
         boolean islogin = true;
         ModelAndView mav = new ModelAndView();
         HttpSession session = request.getSession();
         session.setAttribute("userid",form.getUserid());
         session.setMaxInactiveInterval(1800);
-        
+        String sessionId = (String) session.getAttribute("userid");
 
         //session.getId();
         // servlet 으로 파라미터 받기
@@ -61,21 +61,30 @@ public class LoginController {
         if(loginch == null || loginch.getUserid() == null) {
             islogin = false;
             session.invalidate();
-            model.addAttribute("islogin",islogin);
+            mav.addObject("islogin",islogin);
+           
             mav.setViewName("login/login");
             return mav;
         }
    
         List<UserList> ulist= userService.getUserList();
-        model.addAttribute("userList",ulist);
+        mav.addObject("userList",ulist);
         mav.setViewName("login/userList");
 
         return mav ;
     }
 
     @RequestMapping(value = "/view/{id}", method= RequestMethod.GET)
-    public ModelAndView userView (@PathVariable("id") String id, Model model) throws Exception {
-        ModelAndView mav = new ModelAndView();
+    public ModelAndView userView (@PathVariable("id") String id, Model model, HttpSession session) throws Exception {
+    	 ModelAndView mav = new ModelAndView();
+    	String sessionId = (String) session.getAttribute("userid");
+		if (sessionId == null) {
+			 mav.setViewName("login/userView");
+			  mav.setViewName("login/login");
+			  return mav;
+		}
+		
+       
         UserInfo  userinfo = userService.getuserinfo(id);
         String datetime = userinfo.getJoin_date();
         String joindate = datetime.substring(0,16);

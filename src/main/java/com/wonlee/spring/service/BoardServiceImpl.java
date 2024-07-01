@@ -2,6 +2,7 @@ package com.wonlee.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.wonlee.spring.form.BoardForm;
 import com.wonlee.spring.mapper.BoardMapper;
@@ -49,6 +50,7 @@ public class BoardServiceImpl implements BoardService {
 	public BoardForm boardView(int seq) {
 
 		try {
+			
 			return boardMapper.boardView(seq);
 
 		} catch (Exception e) {
@@ -58,19 +60,47 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 	
-	public int boardUpdate(BoardForm form) {
-		int suceess = 1;
+	@Transactional
+	public int boardViews(int seq) {
 		try {
-			 boardMapper.boardUpdate(form);
-			 return suceess;
+			
+			return boardMapper.boardViews(seq);
 
 		} catch (Exception e) {
 			log.error("loginCheck Error {}", e);
 			e.printStackTrace();
-			suceess =0;
+		}
+		return 0;
+	}
+	
+
+
+	public int boardUpdate(BoardForm form) {
+		int suceess = 1;
+		try {
+			boardMapper.boardUpdate(form);
+			return suceess;
+
+		} catch (Exception e) {
+			log.error("loginCheck Error {}", e);
+			e.printStackTrace();
+			suceess = 0;
 			return suceess;
 		}
 	}
-	
+
+	public int boardDelete(String userid, String seq) {
+		int suceess = 1;
+		try {
+			boardMapper.boardDelete(userid, seq);
+			return suceess;
+
+		} catch (Exception e) {
+			log.error("loginCheck Error {}", e);
+			e.printStackTrace();
+			suceess = 0;
+			return suceess;
+		}
+	}
 
 }

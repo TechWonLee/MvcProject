@@ -13,5 +13,11 @@ public interface BoardService {
 	public BoardForm boardView(int seq);
 	
 	public int boardUpdate(BoardForm form);
+	
+	public int boardDelete(String userid, String seq);
+	
+	public int boardViews(int seq);
+	
+	
 
 }

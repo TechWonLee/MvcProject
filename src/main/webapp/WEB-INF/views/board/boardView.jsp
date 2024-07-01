@@ -27,7 +27,7 @@
 		<div class="detail-group">
 			<label for="title">제목</label>
 			<p id="BoardTitle" style="text-align: center;">${board.title}</p>
-			<input type="hidden" id="title" value="${board.title}">
+			 <input type="text" id="title" name="title" value="${board.title}" class="hidden-input">
 		</div>
 		<div class="form-group">
 			<label for="content">내용</label>
@@ -40,7 +40,7 @@
 			<c:if test="${sessionId eq board.userid}">
 				<button id="editbutton" class="btn-edit">수정</button>
 			</c:if>
-			<a href="javascript:window.history.back();" class="btn-back">뒤로가기</a>
+			<a href="/board/boardList.do?userid=${board.userid}" class="btn-back">뒤로가기</a>
 
 		</div>
 	</div>

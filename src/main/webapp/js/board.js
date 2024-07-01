@@ -1,6 +1,37 @@
+
+function delete_board(userid,seq) {
+
+	$.ajax({
+					url: "/board/boardDelete.do",
+					type: "POST",
+					data:{
+						userid: userid,
+						seq: seq
+					},
+					dataType: "json",
+					success: function(response) {
+					
+						if(response.sessionReset === '0') {
+							alert(response.message);
+							return window.location.href = "/login/login.do";
+						}
+						
+						alert(response.message);
+						window.location.reload();
+						
+					},
+					error: function(status, error) {
+						console.log("status : : :"+ status );
+						console.log("error : : :"+ error);
+					    alert(response.message);
+						return window.location.href = "/error/error.do";
+					    }
+
+
+				})
+			
+		}
 $(document).ready(function() {
-
-
 	$("#editbutton").on("click", function() {
 
 		document.getElementById('showcontent').style.visibility = 'hidden';
@@ -16,7 +47,13 @@ $(document).ready(function() {
 		});
 		$('#content-div').append(newContent);
 
-
+		
+		document.getElementById('BoardTitle').style.display = 'none'; 
+			  	let title = document.getElementById('title');
+				title.classList.remove('hidden-input');
+				title.classList.add('visible-input');
+				title.focus();
+				
 		//자바스크립트로 동적 submit 버튼 생성
 		let newSubmit = document.createElement('input');
 		newSubmit.type = 'button';
@@ -26,7 +63,7 @@ $(document).ready(function() {
 
 		newSubmit.addEventListener('click', function() {
 			//Ajax로 처리해보기 
-
+			
 			let content = document.getElementById('content').value;
 			let userid = document.getElementById('userid').value;
 			let seq = document.getElementById('seq').value;
@@ -100,6 +137,6 @@ $(document).ready(function() {
 			button.setAttribute = 'btn-btn-create';
 			*/
 	});
-
+	
 
 });

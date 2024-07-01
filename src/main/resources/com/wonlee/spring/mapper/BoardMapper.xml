@@ -7,26 +7,32 @@
 
 	<insert id="boardWrite"
 		parameterType="com.wonlee.spring.form.BoardForm">
-		INSERT INTO BOARD (userid, title, content, name, write_date)
-		VALUES (#{userid}, #{title}, #{content}, #{name}, CURRENT_TIMESTAMP)
+		INSERT INTO BOARD (userid, title, content, name,
+		write_date)
+		VALUES (#{userid}, #{title}, #{content}, #{name},
+		CURRENT_TIMESTAMP)
 	</insert>
 
 	<select id="boardList"
 		resultType="com.wonlee.spring.form.BoardForm">
-		select seq, userid , title , content , name, DATE_FORMAT(write_date, '%Y-%m-%d') AS write_date from board order by seq DESC;
+		select seq, userid , title , content , name, view_cnt,
+		DATE_FORMAT(write_date, '%Y-%m-%d') AS write_date from board order by
+		seq DESC;
 	</select>
-	
+
 	<select id="boardView"
 		resultType="com.wonlee.spring.form.BoardForm">
 		select * from board where seq = #{seq}
 	</select>
-	
-	<update id="boardUpdate" parameterType="com.wonlee.spring.form.BoardForm">
-    update board set
-        content = #{content},
-        title = #{title}
-    where userid = #{userid} and seq = #{seq}
-</update>
 
+	<delete id="boardDelete">
+		delete from board
+		where userid=#{userid} and seq=#{seq}
+	</delete>
+
+
+	<update id="boardViews" parameterType="int">
+	update board set view_cnt = view_cnt +1 where seq = #{seq}
+	</update>
 
 </mapper>

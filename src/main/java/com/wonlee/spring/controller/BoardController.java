@@ -29,6 +29,15 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	/**
+	 * 
+	 * @param userid
+	 * @param password
+	 * @param model
+	 * @param session
+	 * @return 페이지
+	 */
+	
 	@RequestMapping("/boardList.do")
 	public String boardList(@RequestParam(value = "userid", required = false) String userid,
 			@RequestParam(value = "password", required = false) String password, Model model, HttpSession session) {
@@ -50,6 +59,13 @@ public class BoardController {
 		return "board/boardList";
 	}
 
+	/**
+	 * 
+	 * @param userid
+	 * @param model
+	 * @param session
+	 * @return 페이지
+	 */
 	@RequestMapping("/boardWriteView.do")
 	public String boardWriteView(@RequestParam("userid") String userid, Model model, HttpSession session) {
 
@@ -64,6 +80,15 @@ public class BoardController {
 
 		return "board/boardWrite";
 	}
+	
+	/**
+	 * 
+	 * @param form
+	 * @param model
+	 * @param session
+	 * @param redirectAttributes
+	 * @return 페이지
+	 */
 
 	@RequestMapping("boardWrite.do")
 	public String boardWrite(@ModelAttribute("boardForm") BoardForm form, Model model, HttpSession session,
@@ -83,6 +108,14 @@ public class BoardController {
 		return "redirect:/board/boardList.do";
 
 	}
+	
+	/**
+	 * 
+	 * @param seq
+	 * @param model
+	 * @param session
+	 * @return 페이지
+	 */
 
 	@RequestMapping("boardView.do")
 	public String boardView(@RequestParam("seq") int seq, Model model, HttpSession session) {
@@ -90,16 +123,33 @@ public class BoardController {
 		if (sessionId == null) {
 			return "login/login";
 		}
-
+		
+		//조회수 update
+		int success = boardService.boardViews(seq);
 		BoardForm boardform = boardService.boardView(seq);
 		model.addAttribute("sessionId", sessionId);
 		model.addAttribute("board", boardform);
+		
+		if (success == 0) {
+			return "error/error";
+		}
+		
 		if (boardform == null) {
 			return "error/error";
 		}
 		return "board/boardView";
 	}
 
+	//비동기 처리
+	
+	/**
+	 * 
+	 * @param form
+	 * @param session
+	 * @param model
+	 * @return JSONObject
+	 */
+	
 	@ResponseBody
 	@PostMapping("/boardUpdate.do")
 	public JSONObject boardUpdate(@RequestBody BoardForm form, HttpSession session, Model model) {
@@ -130,6 +180,14 @@ public class BoardController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param userid
+	 * @param seq
+	 * @param session
+	 * @param model
+	 * @return JSONObject
+	 */
 	@ResponseBody
 	@PostMapping("/boardDelete.do")
 	public JSONObject boardDelete(@RequestParam("userid") String userid, @RequestParam("seq") String seq,

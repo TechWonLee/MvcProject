@@ -16,5 +16,6 @@ public interface BoardMapper {
 	public BoardForm boardView(int seq);
 	public int boardUpdate(BoardForm form);
 	public int boardDelete(@Param("userid")String userid, @Param("seq")String seq);
+	public int boardViews(int seq);
 
 }

@@ -25,6 +25,7 @@
 						<th style="text-align: center;">작성일</th>
 						<th style="text-align: center;">조회수</th>
 						<th style="text-align: center;">글관리</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -38,12 +39,19 @@
 							
 							<td style="text-align: center;">${boardList.write_date}</td>
 							<td style="text-align: center;">${boardList.view_cnt}</td>
-							<td style="text-align: center;"><c:if
-									test="${sessionId eq userinfo.userid}">
+
+							<td style="text-align: center;">
+							<c:choose>
+							<c:when test="${sessionId eq boardList.userid}">
 									<a href="/board/boardView.do?seq=${boardList.seq}"
 										class="btn-edit">수정</a>
 									<a href="javascript:delete_board('${boardList.userid}','${boardList.seq}');" class="btn-delete">삭제</a>
-								</c:if></td>
+								</c:when>
+								<c:otherwise>
+								<p>수정과 삭제는 작성자와 로그인 사용자가 동일할때, 가능합니다.</p>
+								</c:otherwise>
+								</c:choose>		
+								</td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -15,7 +15,7 @@
 
 	<select id="boardList"
 		resultType="com.wonlee.spring.form.BoardForm">
-		select seq, userid , title , content , name,
+		select seq, userid , title , content , name, view_cnt,
 		DATE_FORMAT(write_date, '%Y-%m-%d') AS write_date from board order by
 		seq DESC;
 	</select>
@@ -25,10 +25,20 @@
 		select * from board where seq = #{seq}
 	</select>
 
+
 	<delete id="boardDelete">
 		delete from board
 		where userid=#{userid} and seq=#{seq}
 	</delete>
 
+	<delete id="boardDelete">
+		delete from board
+		where userid=#{userid} and seq=#{seq}
+	</delete>
+
+
+	<update id="boardViews" parameterType="int">
+	update board set view_cnt = view_cnt +1 where seq = #{seq}
+	</update>
 
 </mapper>

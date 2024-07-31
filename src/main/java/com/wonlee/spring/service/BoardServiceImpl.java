@@ -90,6 +90,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
+	
+	
+	
+	
 	public int boardDelete(String userid, String seq) {
 		int suceess = 1;
 		try {

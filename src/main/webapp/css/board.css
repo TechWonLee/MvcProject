@@ -163,3 +163,45 @@ table tr:hover {
     text-align: center;
     margin-top: 20px;
 }
+
+/* 파일 업로드 스타일 */
+.file-upload {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+
+.file-upload h2 {
+    margin-top: 0;
+}
+
+.file-upload #btn-upload {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.file-upload #input_file {
+    display: none;
+}
+
+.file-upload .data_file_txt {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+
+.file-upload .data_file_txt span {
+    font-size: 10px;
+    color: gray;
+}
+
+.file-upload #articlefileChange {
+    margin-top: 10px;
+}

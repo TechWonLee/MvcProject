@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wonlee.spring.User.UserInfo;
@@ -81,6 +82,22 @@ public class BoardController {
 		return "board/boardWrite";
 	}
 	
+	@RequestMapping("/excerciseBook.do")
+	public String excerciseBook(@RequestParam("userid") String userid, Model model, HttpSession session) {
+
+		String sessionId = (String) session.getAttribute("userid");
+		if (sessionId == null) {
+			return "login/login";
+		}
+
+		UserInfo userinfo = userService.getuserinfo(userid);
+
+		model.addAttribute("userinfo", userinfo);
+
+		return "excercise/excersice";
+	}
+	
+	
 	/**
 	 * 
 	 * @param form
@@ -92,7 +109,10 @@ public class BoardController {
 
 	@RequestMapping("boardWrite.do")
 	public String boardWrite(@ModelAttribute("boardForm") BoardForm form, Model model, HttpSession session,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes,
+			@RequestParam(value = "files", required = false) List<MultipartFile> files) {
+		
+		System.out.println("file  : :: " + files );
 
 		String sessionId = (String) session.getAttribute("userid");
 		if (sessionId == null) {

@@ -44,6 +44,5 @@ http://mybatis.org/schema/mybatis-spring-2.0.xsd">
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory" />
     </bean>
-
-
+    
 </beans>

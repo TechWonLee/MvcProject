@@ -40,6 +40,12 @@
             </list>
         </property>
     </bean>
+    
+    <!-- 파일 업로드 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="maxUploadSize" value="10000000"></beans:property>
+	</beans:bean>
+    
 
     <!--한글 깨짐-->
     <mvc:annotation-driven>

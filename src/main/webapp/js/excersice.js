@@ -105,6 +105,42 @@
 	     });
 	   });
 	 });
+	 
+	 const d1 = () => {
+	   return new Promise((res, rej) => {
+	     setTimeout(() => {
+	       res("1번 주문완");
+	     }, 1000);
+	   });
+	 };
+
+	 const d2 = (message) => {
+	   console.log(message);
+	   return new Promise((res, rej) => {
+	     setTimeout(() => {
+	       res("2번 주문완");
+	     }, 3000);
+	   });
+	 };
+
+	 const d3 = (message) => {
+	   console.log(message);
+	   return new Promise((res, rej) => {
+	     setTimeout(() => {
+	       res("3번 주문완");
+	     }, 2000);
+	   });
+	 };
+
+	 console.log("시작");
+	 d1()
+	   .then((res) => d2(res))
+	   .then((res) => d3(res))
+	   .then((res) => console.log(res));  // 화살표 함수의 괄호가 수정되었습니다.
+
+	 
+	
+
 
 	 
 	  

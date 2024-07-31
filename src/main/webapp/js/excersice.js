@@ -97,8 +97,6 @@
 	   }, 2000);
 	 };
 
-
-
 	 console.log("시작");
 	 f1(function() {
 	   f2(function() {

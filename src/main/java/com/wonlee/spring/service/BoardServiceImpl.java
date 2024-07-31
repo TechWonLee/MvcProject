@@ -89,18 +89,20 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
+	
 	public int boardDelete(String userid, String seq) {
 		int suceess = 1;
 		try {
-			boardMapper.boardDelete(userid, seq);
-			return suceess;
+			 boardMapper.boardDelete(userid, seq);
+			 return suceess;
 
 		} catch (Exception e) {
 			log.error("loginCheck Error {}", e);
 			e.printStackTrace();
-			suceess = 0;
+			suceess =0;
 			return suceess;
 		}
 	}
+	
 
 }

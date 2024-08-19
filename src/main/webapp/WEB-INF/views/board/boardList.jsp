@@ -13,9 +13,9 @@
 <body>
 	<div class="container">
 		<h1>게시판</h1>
-		<a href="/board/boardWriteView.do?userid=${userinfo.userid}"
+		<a href="/board/boardWriteView.do?userid=${sessionId}"
 			class="btn-create">글 작성</a>
-			<a href="/board/excerciseBook.do?userid=${userinfo.userid}"
+			<a href="/board/excerciseBook.do?userid=${sessionId}"
 			class="btn-create">연습장 페이지</a>
 		<div class="table-container">
 			<table>

@@ -8,9 +8,9 @@
 	<insert id="boardWrite"
 		parameterType="com.wonlee.spring.form.BoardForm">
 		INSERT INTO BOARD (userid, title, content, name,
-		write_date)
+		write_date,file_path)
 		VALUES (#{userid}, #{title}, #{content}, #{name},
-		CURRENT_TIMESTAMP)
+		CURRENT_TIMESTAMP, #{file_path})
 	</insert>
 
 	<select id="boardList"

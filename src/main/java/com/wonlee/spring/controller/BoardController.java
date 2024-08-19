@@ -1,7 +1,14 @@
 package com.wonlee.spring.controller;
 
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import java.io.File;
 import com.wonlee.spring.User.UserInfo;
 import com.wonlee.spring.form.BoardForm;
 import com.wonlee.spring.service.BoardService;
@@ -38,7 +45,7 @@ public class BoardController {
 	 * @param session
 	 * @return 페이지
 	 */
-	
+
 	@RequestMapping("/boardList.do")
 	public String boardList(@RequestParam(value = "userid", required = false) String userid,
 			@RequestParam(value = "password", required = false) String password, Model model, HttpSession session) {
@@ -81,7 +88,7 @@ public class BoardController {
 
 		return "board/boardWrite";
 	}
-	
+
 	@RequestMapping("/excerciseBook.do")
 	public String excerciseBook(@RequestParam("userid") String userid, Model model, HttpSession session) {
 
@@ -96,8 +103,7 @@ public class BoardController {
 
 		return "excercise/excersice";
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param form
@@ -109,26 +115,62 @@ public class BoardController {
 
 	@RequestMapping("boardWrite.do")
 	public String boardWrite(@ModelAttribute("boardForm") BoardForm form, Model model, HttpSession session,
-			RedirectAttributes redirectAttributes,
-			@RequestParam(value = "files", required = false) List<MultipartFile> files) {
-		
-		System.out.println("file  : :: " + files );
+			RedirectAttributes redirectAttributes, HttpServletRequest request,
+			@RequestParam(value = "files", required = false) List<MultipartFile> multipartFile) {
+
+		System.out.println("file  : :: " + multipartFile);
 
 		String sessionId = (String) session.getAttribute("userid");
 		if (sessionId == null) {
 			return "login/login";
 		}
 
-		int isSucess = boardService.boardWrite(form);
-		if (isSucess == 1) {
+		if (multipartFile == null) {
+			int isSucess = boardService.boardWrite(form);
 		} else {
-			return "error/error";
+			//저장할 파일경로 정하기.
+			String fileRoot;
+			String contextRoot = request.getSession().getServletContext().getRealPath("/");
+			fileRoot = contextRoot + "resources/upload/";
+
+			// 파일 디렉토리가 없을 경우 생성
+			File dir = new File(fileRoot);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			try {
+				for (MultipartFile file : multipartFile) {
+					if (!file.isEmpty()) {
+
+						System.out.println(fileRoot);
+
+						String originalFileName = file.getOriginalFilename();// 오리지날 파일명
+						String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+						String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
+
+						// 파일 목적지
+						File targetFile = new File(fileRoot + savedFileName);
+
+						// 저장할 타겟 파일 디렉토리
+						file.transferTo(targetFile);
+						form.setFile_path(fileRoot + savedFileName);
+						int isSucess = boardService.boardWrite(form);
+						// You can save file details in the database here if needed (e.g., file name,
+						// path, etc.)
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "error/error";
+			}
+
 		}
 		redirectAttributes.addAttribute("userid", form.getUserid());
 		return "redirect:/board/boardList.do";
-
 	}
-	
+
 	/**
 	 * 
 	 * @param seq
@@ -143,25 +185,25 @@ public class BoardController {
 		if (sessionId == null) {
 			return "login/login";
 		}
-		
-		//조회수 update
+
+		// 조회수 update
 		int success = boardService.boardViews(seq);
 		BoardForm boardform = boardService.boardView(seq);
 		model.addAttribute("sessionId", sessionId);
 		model.addAttribute("board", boardform);
-		
+
 		if (success == 0) {
 			return "error/error";
 		}
-		
+
 		if (boardform == null) {
 			return "error/error";
 		}
 		return "board/boardView";
 	}
 
-	//비동기 처리
-	
+	// 비동기 처리
+
 	/**
 	 * 
 	 * @param form
@@ -169,7 +211,7 @@ public class BoardController {
 	 * @param model
 	 * @return JSONObject
 	 */
-	
+
 	@ResponseBody
 	@PostMapping("/boardUpdate.do")
 	public JSONObject boardUpdate(@RequestBody BoardForm form, HttpSession session, Model model) {
@@ -200,7 +242,6 @@ public class BoardController {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param userid

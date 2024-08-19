@@ -2,6 +2,8 @@ package com.wonlee.spring.form;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardForm {
 	public String userid;
 	public String title;
@@ -11,6 +13,15 @@ public class BoardForm {
 	public int view_cnt;
 	public String write_date;
 	private List<BoardForm> boardList;
+	public String file_path;
+
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
+	}
 
 	public List<BoardForm> getBoardList() {
 		return boardList;

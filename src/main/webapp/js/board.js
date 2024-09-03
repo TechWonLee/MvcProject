@@ -252,6 +252,8 @@ $(document).ready(function() {
 
 
 	});
-
-
 });
+
+function openChat() {
+    window.open("/board/chat-popup.do", "ChatWindow", "width=600,height=400");
+}

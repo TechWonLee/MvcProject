@@ -17,7 +17,14 @@
 			class="btn-create">글 작성</a>
 			<a href="/board/excerciseBook.do?userid=${sessionId}"
 			class="btn-create">연습장 페이지</a>
+			
+			<div id="chatModal" class="modal">
+ 			<button onclick="openChat()">Lets Chat</button>
+</div>
+			
 		<div class="table-container">
+		
+		
 			<table>
 				<thead>
 					<tr>

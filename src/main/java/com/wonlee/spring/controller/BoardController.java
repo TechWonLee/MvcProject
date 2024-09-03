@@ -280,5 +280,15 @@ public class BoardController {
 			}
 		}
 	}
-
+	@RequestMapping("chat-popup.do")
+	public String Chat(Model model, HttpSession session) {
+		String sessionId = (String) session.getAttribute("userid");
+		if (sessionId == null) {
+			return "login/login";
+		}
+		model.addAttribute("sessionId", sessionId);
+		
+		return "chat/chat-popup";
+	}
+	
 }

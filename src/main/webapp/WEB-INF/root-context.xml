@@ -24,6 +24,7 @@ http://mybatis.org/schema/mybatis-spring-2.0.xsd">
 
     </bean>
 
+
     <!-- (xml과 연결시키는) *Mapper.java 파일 등록-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.wonlee.spring.mapper" />

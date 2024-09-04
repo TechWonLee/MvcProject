@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/board.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/board.js"></script>
+<script src="${pageContext.request.contextPath}/js/board.js" defer></script>
 </head>
 <body>
 	<div class="container">

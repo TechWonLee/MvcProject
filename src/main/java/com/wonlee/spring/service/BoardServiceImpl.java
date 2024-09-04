@@ -24,14 +24,11 @@ public class BoardServiceImpl implements BoardService {
 		int suceess = 1;
 		try {
 
-			BoardForm boardFrom = new BoardForm();
-
 			suceess = boardMapper.boardWrite(form);
 
 		} catch (Exception e) {
 			log.error("loginCheck Error {}", e);
 			e.printStackTrace();
-			int sucess = -1;
 			return suceess;
 		}
 		return suceess;

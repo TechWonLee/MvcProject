@@ -1,4 +1,4 @@
-package com.wonlee.spring.controller;
+package com.wonlee.spring.Chat;
 
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 
-@Controller
+
 @ServerEndpoint(value="/echo.do")
 public class WebSocketChat {
 	

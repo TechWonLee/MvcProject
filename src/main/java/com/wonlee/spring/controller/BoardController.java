@@ -1,14 +1,11 @@
 package com.wonlee.spring.controller;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -126,7 +123,7 @@ public class BoardController {
 		}
 
 		if (multipartFile == null) {
-			int isSucess = boardService.boardWrite(form);
+			boardService.boardWrite(form);
 		} else {
 			//저장할 파일경로 정하기.
 			String fileRoot;
@@ -155,7 +152,7 @@ public class BoardController {
 						// 저장할 타겟 파일 디렉토리
 						file.transferTo(targetFile);
 						form.setFile_path(fileRoot + savedFileName);
-						int isSucess = boardService.boardWrite(form);
+						boardService.boardWrite(form);
 						// You can save file details in the database here if needed (e.g., file name,
 						// path, etc.)
 					}

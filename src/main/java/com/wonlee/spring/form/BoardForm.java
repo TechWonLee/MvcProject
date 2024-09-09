@@ -2,7 +2,7 @@ package com.wonlee.spring.form;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 public class BoardForm {
 	public String userid;

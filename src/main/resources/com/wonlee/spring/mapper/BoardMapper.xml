@@ -34,5 +34,12 @@
 	<update id="boardViews" parameterType="int">
 	update board set view_cnt = view_cnt +1 where seq = #{seq}
 	</update>
+	
+	<update id="boardUpdate" parameterType="com.wonlee.spring.form.BoardForm">
+    update board set
+        content = #{content},
+        title = #{title}
+    where userid = #{userid} and seq = #{seq}
+</update>
 
 </mapper>

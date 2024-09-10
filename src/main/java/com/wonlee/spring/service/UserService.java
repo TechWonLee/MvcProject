@@ -1,8 +1,8 @@
 package com.wonlee.spring.service;
 
-import com.wonlee.spring.User.UserInfo;
-import com.wonlee.spring.User.UserList;
 import com.wonlee.spring.form.LoginForm;
+import com.wonlee.spring.user.UserInfo;
+import com.wonlee.spring.user.UserList;
 
 import java.util.List;
 

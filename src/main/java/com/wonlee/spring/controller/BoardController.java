@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
-import com.wonlee.spring.User.UserInfo;
+
 import com.wonlee.spring.form.BoardForm;
 import com.wonlee.spring.service.BoardService;
 import com.wonlee.spring.service.UserService;
+import com.wonlee.spring.user.UserInfo;
 
 import jdk.internal.org.jline.utils.Log;
 

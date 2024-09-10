@@ -1,4 +1,4 @@
-package com.wonlee.spring.Chat;
+package com.wonlee.spring.chat;
 
 
 import java.util.ArrayList;

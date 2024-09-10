@@ -1,9 +1,9 @@
 package com.wonlee.spring.controller;
 
 
-import com.wonlee.spring.User.UserInfo;
-import com.wonlee.spring.User.UserList;
 import com.wonlee.spring.service.UserService;
+import com.wonlee.spring.user.UserInfo;
+import com.wonlee.spring.user.UserList;
 import com.wonlee.spring.form.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

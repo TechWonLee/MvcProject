@@ -1,4 +1,4 @@
-package com.wonlee.spring.Chat;
+package com.wonlee.spring.chat;
 
 public class ChatMessage {
 	

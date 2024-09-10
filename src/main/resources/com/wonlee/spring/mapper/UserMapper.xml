@@ -16,11 +16,11 @@
     select userid from userinfo where userid = #{userid} and password = #{password};
     </select>
 
-    <select id="getuserList" resultType="com.wonlee.spring.User.UserInfo">
+    <select id="getuserList" resultType="com.wonlee.spring.user.UserInfo">
         select userid from userinfo;
     </select>
 
-    <select id="getuserinfo" parameterType="com.wonlee.spring.User.UserInfo" resultType="com.wonlee.spring.User.UserInfo">
+    <select id="getuserinfo" parameterType="com.wonlee.spring.user.UserInfo" resultType="com.wonlee.spring.user.UserInfo">
         select * from userinfo where userid = #{userid};
     </select>
 

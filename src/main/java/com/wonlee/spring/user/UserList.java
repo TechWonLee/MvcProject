@@ -1,4 +1,4 @@
-package com.wonlee.spring.User;
+package com.wonlee.spring.user;
 
 import java.util.List;
 

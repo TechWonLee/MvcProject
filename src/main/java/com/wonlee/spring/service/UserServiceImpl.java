@@ -1,9 +1,8 @@
 package com.wonlee.spring.service;
 
-import com.wonlee.spring.User.UserInfo;
-import com.wonlee.spring.User.UserList;
 import com.wonlee.spring.mapper.UserMapper;
-
+import com.wonlee.spring.user.UserInfo;
+import com.wonlee.spring.user.UserList;
 import com.wonlee.spring.form.LoginForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -142,6 +142,16 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- mock라이브러리 추가 Test 관련-->
+		
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>1.10.19</version>
+        <scope>test</scope>
+    </dependency>
+
+
 
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>

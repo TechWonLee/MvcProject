@@ -33,7 +33,7 @@ public class WebSocketChat {
         logger.info("Open session id:"+session.getId());
         try {
             final Basic basic=session.getBasicRemote();
-            basic.sendText("대화방에 연결 되었습니다.");
+            basic.sendText("어서오세요 대화방에 참가하셨습니다.");
         }catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());
@@ -47,7 +47,7 @@ public class WebSocketChat {
      * @param sender
      * @param message
      */
-    private void sendAllSessionToMessage(Session self, String sender, String message) {
+    public void sendAllSessionToMessage(Session self, String sender, String message) {
     	
         try {
             for(Session session : WebSocketChat.sessionList) {
@@ -85,6 +85,17 @@ public class WebSocketChat {
     
     @OnError
     public void onError(Throwable e,Session session) {
+    	//log 남기기
+        logger.error("Web소켓 통신에러" + session.getId() + ": : :"+ e.getMessage());
+        
+        try {
+        	session.close();
+        	session.getBasicRemote().sendText("에러발생 세션이 종료되었습니다" + e.getMessage()+"를 관리자에게 말씀해주세요");
+        	
+        	// 클라이언트에 에러메세지 전송
+        }catch(Exception ex) {
+        	logger.error("클라이언트에게 보낸 메세지 =>"+ "에러발생 : " + e.getMessage());
+        }
         
     }
     

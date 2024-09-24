@@ -55,11 +55,12 @@ public class websocketTest {
 
     @Test
     public void testOnError() throws Exception {
+    	System.out.println("에러발생");
         // Session ID 설정
         when(session.getId()).thenReturn("12345");
 
         // Throwable 에러 시뮬레이션
-        Throwable throwable = new RuntimeException("Test Error");
+        Throwable throwable = new RuntimeException("Test Error 발생");
 
         // onError 메서드 호출
         webSocketChat.onError(throwable, session);

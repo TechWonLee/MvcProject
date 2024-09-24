@@ -86,7 +86,7 @@ public class WebSocketChat {
     @OnError
     public void onError(Throwable e,Session session) {
     	//log 남기기
-        logger.error("Web소켓 통신에러" + session.getId() + ": : :"+ e.getMessage());
+    	 System.out.println("Web소켓 통신에러" + session.getId() + ": : :"+ e.getMessage());
         
         try {
         	session.close();
@@ -94,7 +94,7 @@ public class WebSocketChat {
         	
         	// 클라이언트에 에러메세지 전송
         }catch(Exception ex) {
-        	logger.error("클라이언트에게 보낸 메세지 =>"+ "에러발생 : " + e.getMessage());
+        	 System.out.println("클라이언트에게 보낸 메세지 =>"+ "에러발생 : " + e.getMessage());
         }
         
     }

@@ -89,9 +89,9 @@ public class WebSocketChat {
     	 System.out.println("Web소켓 통신에러" + session.getId() + ": : :"+ e.getMessage());
         
         try {
-        	session.close();
-        	session.getBasicRemote().sendText("에러발생 세션이 종료되었습니다" + e.getMessage()+"를 관리자에게 말씀해주세요");
         	
+        	session.getBasicRemote().sendText("에러발생 세션이 종료되었습니다" + e.getMessage()+"를 관리자에게 말씀해주세요");
+        	session.close();
         	// 클라이언트에 에러메세지 전송
         }catch(Exception ex) {
         	 System.out.println("클라이언트에게 보낸 메세지 =>"+ "에러발생 : " + e.getMessage());

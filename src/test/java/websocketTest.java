@@ -1,71 +1,54 @@
-
-
 import static org.mockito.Mockito.*;
-
 import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
-
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import com.wonlee.spring.chat.WebSocketChat;
 
+@TestMethodOrder(OrderAnnotation.class) // 테스트 순서를 명시적으로 지정
 public class websocketTest {
 
-	private WebSocketChat webSocketChat;
+    private WebSocketChat webSocketChat;
     private Session session;
     private Basic basicRemote;
 
     @BeforeEach
     public void setUp() {
-        // WebSocketChat 객체 초기화
-        webSocketChat = new WebSocketChat();
+        webSocketChat = new WebSocketChat(); // WebSocketChat 객체 초기화
+        session = mock(Session.class); // Mock 세션 생성
+        basicRemote = mock(Basic.class); // Mock Basic Remote 생성
 
-        // Mock 세션 및 RemoteEndpoint 생성
-        session = mock(Session.class);
-        basicRemote = mock(Basic.class);
-        
-        // Session에 대해 getBasicRemote가 호출될 때 mock된 basicRemote 반환
+        // Mock된 세션이 Basic Remote를 반환하도록 설정
         when(session.getBasicRemote()).thenReturn(basicRemote);
     }
 
     @Test
+    @Order(1) // 실행 순서 1
     public void testOnOpen() throws Exception {
-        // Session ID 설정
-        when(session.getId()).thenReturn("12345");
-
-        // onOpen 메서드 호출
-        webSocketChat.onOpen(session);
-
-        // 메세지 전송이 호출됐는지 검증
-        verify(basicRemote, times(1)).sendText("어서오세요 대화방에 참가하셨습니다.");
+        when(session.getId()).thenReturn("12345"); // 세션 ID 설정
+        webSocketChat.onOpen(session); // onOpen 호출
+        verify(basicRemote, times(1)).sendText("어서오세요 대화방에 참가하셨습니다."); // 메시지 전송 검증
     }
 
     @Test
+    @Order(2) // 실행 순서 2
     public void testOnMessage() throws Exception {
-        // Session ID 설정
-        when(session.getId()).thenReturn("12345");
-
-        // onMessage 메서드 호출
-        webSocketChat.onMessage("Hello,User1", session);
-
-        // 메시지 전송이 호출됐는지 검증
-        verify(basicRemote, times(1)).sendText("<나> : Hello");
+        when(session.getId()).thenReturn("12345"); // 세션 ID 설정
+        webSocketChat.onMessage("Hello,User1", session); // onMessage 호출
+        verify(basicRemote, times(1)).sendText("<나> : Hello"); // 메시지 전송 검증
     }
 
     @Test
+    @Order(3) // 실행 순서 3
     public void testOnError() throws Exception {
-    	System.out.println("에러발생");
-        // Session ID 설정
-        when(session.getId()).thenReturn("12345");
-
-        // Throwable 에러 시뮬레이션
-        Throwable throwable = new RuntimeException("Test Error 발생");
-
-        // onError 메서드 호출
-        webSocketChat.onError(throwable, session);
-
-        // 에러 발생 후 세션 종료를 검증
-        verify(session, times(1)).close();
+        System.out.println("에러발생"); // 에러 로그 출력
+        when(session.getId()).thenReturn("12345"); // 세션 ID 설정
+        Throwable throwable = new RuntimeException("Test Error 발생"); // 에러 시뮬레이션
+        webSocketChat.onError(throwable, session); // onError 호출
+        verify(session, times(1)).close(); // 세션 종료 검증
     }
 }
